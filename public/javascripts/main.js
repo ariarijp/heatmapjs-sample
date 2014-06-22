@@ -1,5 +1,5 @@
 $(function(){
-    var draw = function() {
+    var drawHeatmap = function() {
         var canvases = $("canvas");
 
         var config = {
@@ -44,17 +44,13 @@ $(function(){
             dataType: "json",
             data: JSON.stringify(json)
         }).done(function() {
-            draw();
+            drawHeatmap();
         });
     });
  
-    $(window).on("resize", function(){
-        draw();
+    $(window).on("resize scroll", function(){
+        drawHeatmap();
     });
 
-    $(window).on("scroll", function(){
-        draw();
-    });
-
-    draw();
+    drawHeatmap();
 });
