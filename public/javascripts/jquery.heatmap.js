@@ -1,6 +1,8 @@
 (function($){
     var methods = {
         draw: function() {
+            var dfd = jQuery.Deferred();
+
             var canvases = $("canvas");
             
             var config = {
@@ -27,9 +29,18 @@
                 if (canvases.length > 0) {
                     canvases.remove();
                 }
+            }).done(function (){
+                dfd.resolve();
+            }).fail(function (){
+                dfd.reject();
             });
+
+            return dfd.promise();
         }, 
+
         send: function(/* event */ ev) {
+            var dfd = jQuery.Deferred();
+
             var json = {
                 point: {
                     x: ev.pageX,
@@ -43,9 +54,13 @@
                 contentType: 'application/json',
                 dataType: "json",
                 data: JSON.stringify(json)
-            }).done(function() {
-                methods.draw.apply();
+            }).done(function (){
+                dfd.resolve();
+            }).fail(function (){
+                dfd.reject();
             });
+
+            return dfd.promise();
         }
     };
 
