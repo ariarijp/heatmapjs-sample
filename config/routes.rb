@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'heatmap' => 'index#heatmap'
 
   get 'points/summary' => 'points#summary'
-  resources :points
+  resources :points, :only => [:create], :defaults => { :format => 'json' }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

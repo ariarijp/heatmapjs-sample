@@ -8,7 +8,7 @@ class PointsController < ApplicationController
 
     respond_to do |format|
       if @point.save
-        format.json { render :show, status: :created, location: @point }
+        format.json { render json: @point }
       else
         format.json { render json: @point.errors, status: :unprocessable_entity }
       end
